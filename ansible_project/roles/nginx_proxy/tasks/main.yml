@@ -1,0 +1,16 @@
+---
+- name: Установить Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Настроить проксирование Nginx
+  template:
+    src: nginx_proxy.conf.j2
+    dest: /etc/nginx/sites-available/default
+
+- name: Перезапустить Nginx
+  service:
+    name: nginx
+    state: restarted
